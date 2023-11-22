@@ -50,7 +50,7 @@ const getOpenAPIResponse = async (instructions: string, prompt: string) => {
   console.log('messages', messages);
 
 
-  return messages.data[0].content[0].text.value;
+  return (messages.data[0].content[0] as any).text.value;
 };
 
 const asyncInterval = async (

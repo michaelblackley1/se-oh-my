@@ -6,7 +6,6 @@ const fetchRewriteContent = async (
 ) => {
   return fetch("/api/rewrite", {
     method: "POST",
-    contentType: "application/json",
     body: JSON.stringify({ interestArea: interestArea.urlSlug, keywords }),
   }).then((res) => res.json());
 };
