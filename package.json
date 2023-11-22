@@ -1,0 +1,32 @@
+{
+  "name": "se-oh-my",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "sst bind next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@open-universities-australia/design-tokens": "23.0.0",
+    "@open-universities-australia/web-components": "101.0.0",
+    "next": "14.0.3",
+    "openai": "^4.19.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "styled-components": "5.3.9"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/styled-components": "^5.1.31",
+    "aws-cdk-lib": "2.101.1",
+    "constructs": "10.2.69",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.3",
+    "sst": "^2.36.2",
+    "typescript": "^5"
+  }
+}
