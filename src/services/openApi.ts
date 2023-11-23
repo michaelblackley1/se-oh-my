@@ -56,7 +56,7 @@ const getOpenAPIResponse = async (instructions: string, prompt: string) => {
 const asyncInterval = async (
   callback: () => Promise<boolean>,
   ms: number,
-  triesLeft = 20
+  triesLeft = 60
 ) => {
   return new Promise((resolve, reject) => {
     const interval = setInterval(async () => {

@@ -1,5 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Button, FlexContainer, Textarea } from "@open-universities-australia/web-components";
+import {
+  Button,
+  FlexContainer,
+  Textarea,
+} from "@open-universities-australia/web-components";
 import { cssVars } from "@open-universities-australia/design-tokens";
 import styled from "styled-components";
 
@@ -21,10 +25,12 @@ const RewriteContentModal = ({
   showModal,
   finishedRewriting,
   onRewriteContent,
+  handleCloseModal,
 }: {
   showModal: boolean;
   finishedRewriting: boolean;
   onRewriteContent: (keywords: string) => void;
+  handleCloseModal: () => void;
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(showModal);
@@ -34,7 +40,7 @@ const RewriteContentModal = ({
   useEffect(() => {
     setIsModalOpen(false);
     setLoading(false);
-    setKeywords('');
+    setKeywords("");
   }, [finishedRewriting]);
 
   useEffect(() => {
@@ -64,7 +70,7 @@ const RewriteContentModal = ({
       {!loading && (
         <>
           <div className="">
-            <h2>Rewrite the SEO Content</h2>
+            <h2>Magically rewrite the content of this page.</h2>
           </div>
           <div className="">
             <p>Enter the keywords you want to optimise for</p>
@@ -74,12 +80,17 @@ const RewriteContentModal = ({
               onChange={(e) => setKeywords(e.target.value)}
             />
             <FlexContainer gap="md" flexDirection={"column"}>
-                <Button variant="primary" onClick={handeSubmit}>
-                Submit
-                </Button>
-                <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+              <Button variant="primary" onClick={handeSubmit}>
+                Do it!
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  handleCloseModal();
+                }}
+              >
                 Close
-                </Button>
+              </Button>
             </FlexContainer>
           </div>
         </>

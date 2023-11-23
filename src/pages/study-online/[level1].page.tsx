@@ -7,6 +7,7 @@ import {
   SiteLayout,
   Button,
   Container,
+  Text,
 } from "@open-universities-australia/web-components";
 
 import headerFooterContent from "../../content/headerFooter.content";
@@ -15,8 +16,8 @@ import { InterestAreaBanner } from "@/components/InterestAreaBanner";
 import { PageOpenerSection } from "@/components/PageOpenerSection";
 import interestAreas, { InterestArea } from "./interestAreas";
 import RewriteContentModal from "@/components/RewriteContentModal";
-import rewriteContent from "@/services/rewriteContent";
 import fetchRewriteContent from "@/services/fetchRewriteContent";
+import Section from "@/components/Section";
 
 const { Layout, Main } = SiteLayout;
 
@@ -25,7 +26,12 @@ export interface ReWriteInterestArea {
   introduction: string;
   metaTitle: string;
   metaDescription: string;
-  imageUrls: string[] | null;
+  imageUrls: [
+    {
+      url: string | null;
+      caption: string | null;
+    }
+  ];
 }
 
 const StudyOnlinePage = (props: InterestArea) => {
@@ -36,6 +42,9 @@ const StudyOnlinePage = (props: InterestArea) => {
 
   const handleOpenModal = () => {
     setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
   const handleRewriteContent = async (keywords: string) => {
     console.log("about to call openai");
@@ -51,6 +60,11 @@ const StudyOnlinePage = (props: InterestArea) => {
     <>
       <HeadTag title={props.metaTitle} description={props.metaDescription} />
       <Layout>
+        <Container>
+          <Button onClick={handleOpenModal} type="button" variant="primary">
+            Magically rewrite content
+          </Button>
+        </Container>
         <Header
           me={{
             username: "",
@@ -99,32 +113,38 @@ const StudyOnlinePage = (props: InterestArea) => {
               level2Href={props.urlSlug}
             />
           </FlexContainer>
-          {rewritenInterestArea?.imageUrls &&
-            rewritenInterestArea.imageUrls.map((url) => {
-              return (
-                <FlexContainer justifyContent={"center"} gap={"lg"}>
-                  <img
-                    src={url}
-                    width={512}
-                    height={512}
-                    style={{ paddingBottom: "24px" }}
-                  />
-                </FlexContainer>
-              );
-            })}
+
+          {rewritenInterestArea?.imageUrls && (
+            <Section
+              heading={{
+                text: `Generated image`,
+                visuallyHidden: false,
+              }}
+            >
+              {rewritenInterestArea.imageUrls.map((img, i) => {
+                return (
+                  <FlexContainer
+                    key={i}
+                    justifyContent={"center"}
+                    gap={"lg"}
+                    flexDirection={"column"}
+                  >
+                    <img src={img.url as string} width={512} height={512} />
+                    <Text style={{ paddingBottom: "24px" }}>{img.caption}</Text>
+                  </FlexContainer>
+                );
+              })}
+            </Section>
+          )}
         </Main>
         <Footer
           content={{
             ...headerFooterContent.content.footer,
           }}
         />
-        <Container>
-          <Button onClick={handleOpenModal} type="button" variant="primary">
-            Re-write content
-          </Button>
-        </Container>
         <RewriteContentModal
           showModal={openModal}
+          handleCloseModal={handleCloseModal}
           finishedRewriting={finishedRewriting}
           onRewriteContent={handleRewriteContent}
         />
