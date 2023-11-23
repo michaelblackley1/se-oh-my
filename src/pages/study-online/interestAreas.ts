@@ -10,6 +10,7 @@ export interface InterestArea {
   banner: string;
   metaTitle: string;
   metaDescription: string;
+  imagePrompt: string;
 }
 
 const interestAreas: InterestArea[] = [
@@ -30,6 +31,7 @@ const interestAreas: InterestArea[] = [
       `https://www.open.edu.au/api/cms-image?name=/-/media/study-online/2023/level-2-study-online-pages/finance/finance---study-online-banner.ashx&w=1920&ts=1700612924617&q=90`,
     metaTitle: "Business",
     metaDescription: "Business",
+    imagePrompt: "Generate a photo that looks like a stock photo about business and management. It should have at least one person in the photo who looks like a business professional.",
   },
   {
     urlSlug: "primary-education",
@@ -52,6 +54,7 @@ const interestAreas: InterestArea[] = [
       `https://www.open.edu.au/api/cms-image?name=/-/media/images/headers/study-primary-education-online.ashx&w=640&ts=1700612924617&q=90`,
     metaTitle: "Education",
     metaDescription: "Education",
+    imagePrompt: "Photograph of a smiling teacher gesturing towards a blackboard with an equation on it in a classroom. The classroom is full of happy, diverse and attentive elementary school children who are sitting at their desks and listening to the teacher, decorated with educational posters and student artwork",
   },
   {
     urlSlug: "psychology",
@@ -68,8 +71,9 @@ const interestAreas: InterestArea[] = [
     },
     banner:
       `https://www.open.edu.au/api/cms-image?name=/-/media/psychology-banner-generic/study-online-l2-banner---psychology.ashx&w=640&ts=1700612924617&q=90`,
-    metaTitle: "Education",
-    metaDescription: "Education",
+    metaTitle: "Psychology",
+    metaDescription: "Psychology",
+    imagePrompt: "Create an image that features a woman as a psychologist, holding a notebook and pen, in a relaxed and warmly lit therapy session setting.",
   }
 
 ];

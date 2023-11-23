@@ -25,6 +25,7 @@ export interface ReWriteInterestArea {
   introduction: string;
   metaTitle: string;
   metaDescription: string;
+  imageUrls: string[] | null;
 }
 
 const StudyOnlinePage = (props: InterestArea) => {
@@ -98,6 +99,19 @@ const StudyOnlinePage = (props: InterestArea) => {
               level2Href={props.urlSlug}
             />
           </FlexContainer>
+          {rewritenInterestArea?.imageUrls &&
+            rewritenInterestArea.imageUrls.map((url) => {
+              return (
+                <FlexContainer justifyContent={"center"} gap={"lg"}>
+                  <img
+                    src={url}
+                    width={512}
+                    height={512}
+                    style={{ paddingBottom: "24px" }}
+                  />
+                </FlexContainer>
+              );
+            })}
         </Main>
         <Footer
           content={{

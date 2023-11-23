@@ -1,6 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import interestAreas, { InterestArea } from "../study-online/interestAreas";
-import rewriteContent from "@/services/rewriteContent";
+import rewriteContent, {
+  rewriteContentFromChat,
+} from "@/services/rewriteContent";
+import generateImage from "@/services/openApiImageGenerator";
 
 type ResponseData = {
   message: string;
@@ -26,7 +29,17 @@ const handler = async (
     foundInterestArea as InterestArea,
     parsedBody.keywords
   );
-  res.status(200).json(result);
+
+  // const chatResponse = await rewriteContentFromChat(
+  //   foundInterestArea as InterestArea,
+  //   parsedBody.keywords
+  // );
+
+  const imageUrls = await generateImage(
+    foundInterestArea?.imagePrompt as string
+  );
+
+  res.status(200).json({ ...result, imageUrls });
 };
 
 export default handler;
